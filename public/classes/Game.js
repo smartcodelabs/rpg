@@ -2,9 +2,12 @@
 import Player from "./Player.js";
 import Enemy from "./Enemy.js";
 import UserInterface from './UserInterface.js';
+import imgLoader from './imgLoader.js';
 export default class Game {
     constructor(canvas, ctx, levels) {
         this.canvas = canvas;
+        this.uiCanvas = document.getElementById("uiCanvas");
+        this.uiCtx = this.uiCanvas.getContext("2d");
         this.ctx = ctx;
         this.levels = levels;
         this.currentLevelIndex = 0;
@@ -14,9 +17,9 @@ export default class Game {
         this.mouseY = 0;
         this.paused = false;
         // Spieler und Gegner werden erstellt – ihre Positionen werden beim Laden des Levels gesetzt.
-        this.player = new Player(0, 0, 32, 32, 'img:/player/player.png');
+        this.player = new Player(this,0, 0, 32, 32, 'img:/player/idle/Idle_000.png');
         this.enemy = new Enemy(0, 0, 32, 32, 'img:/enemys/enemy1.png');
-        this.ui = new UserInterface(this.player);
+        this.ui = new UserInterface(this.uiCtx,this.player);
 
 
         this.keys = {};
@@ -24,6 +27,10 @@ export default class Game {
 
         this.loadLevel(this.currentLevelIndex);
         this.gameLoop();
+
+        this.preloadedImages = imgLoader();
+        console.log(this.preloadedImages);
+
 
         this.canvas.addEventListener('mousemove', (e) => {
             const rect = canvas.getBoundingClientRect();
@@ -70,7 +77,7 @@ export default class Game {
         this.ui.draw(this.ctx)
         document.getElementById("debugMouse").innerHTML = `
         Maus X: ${this.mouseX}
-        Maus Y: ${this.mouseY-50}
+        Maus Y: ${this.mouseY}
         `
         // Spielerbewegung
         const playerPrevX = this.player.x;
@@ -112,6 +119,18 @@ export default class Game {
 
         //Kollisionsüberprüfung
         const level = this.levels[this.currentLevelIndex];
+
+
+        level.map_data.forEach((row, rowIndex) => {
+               let y = rowIndex;
+            row.forEach((row2, row2Index) => {
+               let x = row2Index;
+               this
+
+
+            });
+        });
+
         level.objects.forEach(obj => {
             if (this.player.isColliding(obj) || this.enemy.isColliding(obj)) {
                 let pc = this.player.isColliding(obj);
@@ -207,4 +226,9 @@ export default class Game {
 
 
     }
+
+
+
+
+
 }

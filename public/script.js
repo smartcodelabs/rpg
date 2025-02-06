@@ -13,37 +13,37 @@ const colorTree = debug ? 'rgba(0, 0, 0, 0)':'rgba(0, 255, 0, 0.4)';
 const levels = [];
 
 // Level 0: Erstelle ein Exit-Objekt, das in Level 1 wechselt
-const exitObj0 = new GameObject(710, 120, 25, 25, colorExit, 'exit');
+const exitObj0 = new GameObject(920, 170, 25, 25, colorExit, 'exit');
 exitObj0.nextLevel = 1;
 levels.push(new Level(
     0,
     'background0.jpg', // Hintergrundbild (muss im public-Ordner liegen)
-    { x: 50, y: 50 },
+    { x: 30, y: 360 },
     { x: 400, y: 300 },
     [
 
         //          0/0      800/0
         //
-        //          600/0    600/800
 
-        //Border
-        new GameObject(0, 0, 800, 1, colorWalls, 'border'),
-        new GameObject(0, 0, 1, 600, colorWalls, 'border'),
-        new GameObject(0, 600, 800, 1, colorWalls, 'border'),
-        new GameObject(800, 0, 1, 600, colorWalls, 'border'),
+            //          600/0    600/800
 
+            // Grenzen des Levels
+            new GameObject(0, 0, 1024, 1, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(0, 0, 1, 800, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(0, 800, 1024, 1, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(1024, 0, 1, 800, 'rgba(0, 0, 0, 0)', 'border'),
 
         //Water
-        new GameObject(435, 0, 90, 50, colorWater, 'water'),
-        new GameObject(435, 110, 90, 150, colorWater, 'water'),
-        new GameObject(435, 320, 90, 90, colorWater, 'water'),
-        new GameObject(435, 480, 90, 150, colorWater, 'water'),
-        new GameObject(130, 250, 40, 140, colorWater, 'tree'),
-
-
-            //Trees
-        new GameObject(60, 270, 40, 40, colorTree, 'tree'),
-        new GameObject(60, 370, 40, 40, colorTree, 'tree'),
+        //     new GameObject(435, 0, 90, 50, colorWater, 'water'),
+        // new GameObject(435, 110, 90, 150, colorWater, 'water'),
+        // new GameObject(435, 320, 90, 90, colorWater, 'water'),
+        // new GameObject(435, 480, 90, 150, colorWater, 'water'),
+        // new GameObject(130, 250, 40, 140, colorWater, 'tree'),
+        //
+        //
+        // //Trees
+        // new GameObject(60, 270, 40, 40, colorTree, 'tree'),
+        // new GameObject(60, 370, 40, 40, colorTree, 'tree'),
 
 
         //Items
@@ -66,10 +66,10 @@ levels.push(new Level(
     [
 
             // Grenzen des Levels
-            new GameObject(0, 0, 800, 1, 'rgba(0, 0, 0, 0)', 'border'),
-            new GameObject(0, 0, 1, 600, 'rgba(0, 0, 0, 0)', 'border'),
-            new GameObject(0, 600, 800, 1, 'rgba(0, 0, 0, 0)', 'border'),
-            new GameObject(800, 0, 1, 600, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(0, 0, 1024, 1, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(0, 0, 1, 800, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(0, 800, 1024, 1, 'rgba(0, 0, 0, 0)', 'border'),
+            new GameObject(1024, 0, 1, 800, 'rgba(0, 0, 0, 0)', 'border'),
 
 
         //new GameObject(250, 250, 60, 60, 'brown', 'obstacle'),
@@ -114,7 +114,9 @@ levels.push(new Level(
 
 // Starte das Spiel
 const canvas = document.getElementById('gameCanvas');
+
 const ctx = canvas.getContext('2d');
+
 
 const game = new Game(canvas, ctx, levels);
 

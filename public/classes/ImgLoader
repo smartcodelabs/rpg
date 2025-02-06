@@ -1,0 +1,43 @@
+const fs = require("fs")
+
+
+function readdir( path, file_array = [] ) {
+
+	return new Promise( resolve => {
+		let directories = []
+		//let files = []
+		let promises = []
+
+		fs.readdir( path, {withFileTypes: true}, ( err, files ) => {
+			file_array.push( ...files.filter( file => file.isFile() ) )
+			directories = files.filter( file => !file.isFile() )
+
+
+			if( directories.length != 0) {
+
+				promises = directories.map( sub => readdir( `${path}/${sub.name}`, file_array ) )
+
+
+
+				Promise.all( promises ).then( files => resolve(files ) )
+			}
+			else {
+				resolve( file_array )
+			}
+
+
+
+		})
+	})
+
+}
+
+readdir( "C:/Users/jasonj/PhpstormProjects/project_rpg/public/img").then( files => {
+
+	console.log( `var images = []` )
+	files[0].forEach( file => {
+		if( file.isFile() ) {
+			console.log( `img = new Image(); \n img.src = \"${file.parentPath}/${file.name}\" \n images.push(img) \n`)
+		}
+	})
+})

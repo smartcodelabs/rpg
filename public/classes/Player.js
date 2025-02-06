@@ -2,7 +2,7 @@
 import GameObject from "./GameObject.js";
 
 export default class Player extends GameObject {
-    constructor(x, y, width, height, color) {
+    constructor(game,x, y, width, height, color) {
         super(x, y, width, height, color, 'player');
         this.speed = 3;
         this.health = 100;
@@ -13,22 +13,39 @@ export default class Player extends GameObject {
         this.exp = 0;
         this.expToNextLevel = 100;
         this.maxHealth = 100;
+        this.game = game;
     }
 
     move(keys) {
 
+        let level = this.game.levels[this.game.currentLevelIndex]
 
         if (keys['ArrowUp'] || keys['w']) {
-            this.y -= this.speed;
+
+            if ( level. map_data[this.y - this.speed  ] [ this.x ]===false) {
+                this.y -= this.speed;
+            }
         }
         if (keys['ArrowDown'] || keys['s']) {
-            this.y += this.speed;
+            if ( level. map_data[this.y + this.speed  ] [ this.x ]===false) {
+                this.y += this.speed;
+            }
+
         }
         if (keys['ArrowLeft'] || keys['a']) {
-            this.x -= this.speed;
+            if ( level. map_data[this.y] [ this.x - this.speed ]===false) {
+                this.x -= this.speed;
+            }
+
         }
         if (keys['ArrowRight'] || keys['d']) {
-            this.x += this.speed;
+            if ( level. map_data[this.y  ] [ this.x + this.speed ]===false) {
+                this.x += this.speed;
+            }
+
+        }
+        if (keys[' ']) {
+            level.objects.forEach(element => {})
         }
 
     }
