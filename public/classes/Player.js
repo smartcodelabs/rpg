@@ -17,30 +17,19 @@ export default class Player extends GameObject {
 
     move(keys) {
 
-        switch (keys){
-            case 'ArrowUp':
-            case 'w'  :
-                this.y -= this.speed;
-                break;
-            case 'ArrowDown':
-            case 's':
-                this.y += this.speed;
-                break;
-            case 'ArrowLeft':
-            case 'a'  :
-                this.x -= this.speed;
-                break;
-            case 'ArrowRight':
-            case 'd'  :
-                this.x += this.speed;
-                break;
 
-            case 'space':
-
-                break;
-
+        if (keys['ArrowUp'] || keys['w']) {
+            this.y -= this.speed;
         }
-
+        if (keys['ArrowDown'] || keys['s']) {
+            this.y += this.speed;
+        }
+        if (keys['ArrowLeft'] || keys['a']) {
+            this.x -= this.speed;
+        }
+        if (keys['ArrowRight'] || keys['d']) {
+            this.x += this.speed;
+        }
 
     }
 }
