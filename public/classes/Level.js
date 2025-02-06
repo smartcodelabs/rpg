@@ -20,7 +20,7 @@ export default class Level {
         this.backgroundMaskImage.onload = ()  =>{
             this.offscreen_ctx.drawImage(this.backgroundMaskImage, 0, 0, this.offscreen_canvas.width, this.offscreen_canvas.height);
             this.generateMap(this.offscreen_ctx)
-            //console.log(this.map_data)
+
         }
 
 
@@ -29,24 +29,23 @@ export default class Level {
     drawBackground(ctx, canvas) {
         ctx.drawImage(this.backgroundImage, 0, 0, canvas.width, canvas.height);
         this.offscreen_ctx.drawImage(this.backgroundMaskImage, 0, 0, this.offscreen_canvas.width, this.offscreen_canvas.height);
-
-
     }
-//Quelle Sven
-generateMap(ctx) {
-   let data = ctx.getImageData(0,0,1024,800).data
-    for( let i = 0; i < data.length; i+=4) {
-        if( parseInt(i / 4) % 1024 == 0 )
-            this.tmp_data = []
-        this.tmp_data.push( data[i] == 0 )
 
-        if( parseInt(i / 4) % 1024 == 1019 ) {
-            this.map_data.push(this.tmp_data)
+    //Quelle Sven
+    generateMap(ctx) {
+       let data = ctx.getImageData(0,0,1024,800).data
+        for( let i = 0; i < data.length; i+=4) {
+            if( parseInt(i / 4) % 1024 == 0 )
+                this.tmp_data = []
+            this.tmp_data.push( data[i] == 0 )
+
+            if( parseInt(i / 4) % 1024 == 1019 ) {
+                this.map_data.push(this.tmp_data)
+            }
         }
+
+
     }
-
-
-}
 
     removeObject(object) {
         this.objects.splice(this.objects.indexOf(object), 1);

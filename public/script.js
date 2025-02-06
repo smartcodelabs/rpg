@@ -84,7 +84,7 @@ exitObj2.nextLevel = 0;
 levels.push(new Level(
     2,
     'dungeon2.jpg', // Hintergrundbild (muss im public-Ordner liegen)
-    { x: 100, y: 100 }, // Startposition des Spielers
+    { x: 550, y: 500 }, // Startposition des Spielers
     { x: 700, y: 500 }, // Zielposition
     [
         // Grenzen des Levels
