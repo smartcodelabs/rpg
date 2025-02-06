@@ -12,7 +12,7 @@ export default class Game {
         //debug
         this.mouseX = 0;
         this.mouseY = 0;
-
+        this.paused = false;
         // Spieler und Gegner werden erstellt – ihre Positionen werden beim Laden des Levels gesetzt.
         this.player = new Player(0, 0, 32, 32, 'img:/player/player.png');
         this.enemy = new Enemy(0, 0, 32, 32, 'img:/enemys/enemy1.png');
@@ -114,19 +114,22 @@ export default class Game {
         const level = this.levels[this.currentLevelIndex];
         level.objects.forEach(obj => {
             if (this.player.isColliding(obj) || this.enemy.isColliding(obj)) {
-
+                let pc = this.player.isColliding(obj);
                 let o = obj.type.split(':')[0];
                 let item = obj.type.split(':')[1];
 
                 switch(o) {
                     case 'exit':
-                        console.log("Levelwechsel!");
-                        // Prüfe, ob das Exit-Objekt einen individuellen Spawnpunkt definiert hat
-                        let spawnPoint = null;
-                        if (obj.spawnPoint) {
-                            spawnPoint = obj.spawnPoint;
+                        if (pc){
+                            console.log("Levelwechsel!");
+                            // Prüfe, ob das Exit-Objekt einen individuellen Spawnpunkt definiert hat
+                            let spawnPoint = null;
+                            if (obj.spawnPoint) {
+                                spawnPoint = obj.spawnPoint;
+                            }
+                            this.loadLevel(obj.nextLevel, spawnPoint);
                         }
-                        this.loadLevel(obj.nextLevel, spawnPoint);
+
                         break;
                     case 'obstacle':
                     case 'wall':
@@ -196,8 +199,12 @@ export default class Game {
     }
 
     gameLoop() {
-        this.update();
-        this.draw();
-        requestAnimationFrame(() => this.gameLoop());
+        if (!this.paused) {
+            this.update();
+            this.draw();
+            requestAnimationFrame(() => this.gameLoop());
+        }
+
+
     }
 }

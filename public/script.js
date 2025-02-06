@@ -34,13 +34,16 @@ levels.push(new Level(
 
 
         //Water
-        new GameObject(435, 0, 100, 50, colorWater, 'water'),
-        new GameObject(435, 110, 100, 150, colorWater, 'water'),
-        new GameObject(435, 340, 100, 90, colorWater, 'water'),
-        new GameObject(435, 510, 100, 150, colorWater, 'water'),
+        new GameObject(435, 0, 90, 50, colorWater, 'water'),
+        new GameObject(435, 110, 90, 150, colorWater, 'water'),
+        new GameObject(435, 320, 90, 90, colorWater, 'water'),
+        new GameObject(435, 480, 90, 150, colorWater, 'water'),
+        new GameObject(130, 250, 40, 140, colorWater, 'tree'),
 
-        //Trees
-        new GameObject(40, 270, 90, 165, colorTree, 'tree'),
+
+            //Trees
+        new GameObject(60, 270, 40, 40, colorTree, 'tree'),
+        new GameObject(60, 370, 40, 40, colorTree, 'tree'),
 
 
         //Items
@@ -54,7 +57,7 @@ levels.push(new Level(
 // Level 1: Exit-Objekt, das zurück zu Level 0 wechselt
 const exitObj1 = new GameObject(390, 65, 25, 25, 'rgba(0, 0, 0, 0)', 'exit');
 exitObj1.nextLevel = 0;
-
+exitObj1 .spawnPoint = { x: 700, y: 200 };
 levels.push(new Level(
     1,
     'background1.jpg', // Hintergrundbild

@@ -21,12 +21,14 @@ export default class Enemy extends GameObject {
         const distance = Math.hypot(dx, dy);
 
         // Wenn der Spieler innerhalb von 20 Pixeln ist, Verfolgung aufnehmen
-        if (distance < 200) {
+        if (distance < 200 !== colision ) {
             // Bestimme den Winkel in Richtung des Spielers
             const angle = Math.atan2(dy, dx);
             // Bewege den Gegner in diese Richtung (sofern die update-Funktion z.B. alle 100ms aufgerufen wird, sorgt das für eine flüssige Bewegung)
-            this.x += Math.cos(angle) * this.speed;
-            this.y += Math.sin(angle) * this.speed;
+            if (distance > 31) {
+                this.x += Math.cos(angle) * this.speed;
+                this.y += Math.sin(angle) * this.speed;
+            }
         } else {
             // Andernfalls: Sanftes Wandern
             // Ändere gelegentlich den Wanderwinkel, um die Richtung nicht konstant zu halten
