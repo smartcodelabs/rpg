@@ -56,22 +56,43 @@ export default class Player extends GameObject {
         // Nur auslösen, wenn der Spieler nicht bereits im Angriffsmodus ist
         if (keys[' '] && !this.isAttacking) {
             this.isAttacking = true;
-            // Setze den Animationsmodus auf "slashing"
             this.currentAnimType = "slashing";
             this.frame = 0;
             this.frameCount = 0;
 
+            // Schaden um später Rüstung etc mit einzuberechnen
+            const damage = 20;
 
+            // Durchlaufe alle Objekte im Level, um die Gegner zu finden
+            for (let i = 0; i < this.game.currentLevel.objects.length; i++) {
+                const obj = this.game.currentLevel.objects[i];
+
+                // Prüfe ob das Objekt ein Gegner
+                if (obj.type === "enemy") {
+                    console.log("machen schaden auf " + obj.type + "");
+                    // Berechne die Distanz zwischen dem Spieler und dem Gegner
+                    const dx = obj.x - this.x;
+                    const dy = obj.y - this.y;
+                    const distance = Math.hypot(dx, dy);
+
+                    // Falls der Gegner nahe genug ist HAUDRAUF !
+                    if (distance < 40) {
+                        obj.takeDamage(damage);
+                    }
+                }
+            }
         }
 
-        // Wenn nicht angreifen, setze den Bewegungsstatus (wird im draw() verwendet)
+
         if (!this.isAttacking) {
             this.isMoving = moving;
         }
     }
 
+
+    //GTP hat bei der animation zeichnung ordentlich mitgeholfen
     draw(ctx) {
-        // Wenn der Spieler angreift, nutzen wir "slashing", ansonsten "walking" oder "idle"
+        // Wenn der Spieler angreift, nutzen wir "slashing" ansonsten "walking" oder "idle"
         let animType;
         let frameSpeed;
 
@@ -116,13 +137,7 @@ export default class Player extends GameObject {
             }
         }
 
-        ctx.drawImage(
-            frames[this.frame],
-            0, 0, 900, 900, // Quellrechteck (anpassen, falls nötig)
-            this.x - this.width / 2,
-            this.y - this.height / 2,
-            this.width + 10,
-            this.height + 10
-        );
+        ctx.drawImage(frames[this.frame], 0, 0, 900, 900, // Quellrechteck (anpassen, falls nötig)
+            this.x - this.width / 2, this.y - this.height / 2, this.width + 10, this.height + 10);
     }
 }
