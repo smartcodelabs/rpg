@@ -1,4 +1,6 @@
+Author: Sven
 const fs = require("fs")
+
 
 
 function readdir( path, file_array = [] ) {
