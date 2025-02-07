@@ -1,10 +1,17 @@
-// public/classes/Game.js
+
 import Player from "./Player.js";
 import Enemy from "./Enemy.js";
 import UserInterface from './UserInterface.js';
 import imgLoader from './imgLoader.js';
 export default class Game {
     constructor(canvas, ctx, levels) {
+
+        if (Game._instance) {
+            return Game._instance;
+        }
+
+
+
         this.canvas = canvas;
         this.uiCanvas = document.getElementById("uiCanvas");
         this.uiCtx = this.uiCanvas.getContext("2d");
@@ -27,9 +34,10 @@ export default class Game {
 
         this.loadLevel(this.currentLevelIndex);
         this.gameLoop();
+        this.loader = new imgLoader();
+        this.preloadedImages = this.loader.imgaes;
 
-        this.preloadedImages = imgLoader();
-        console.log(this.preloadedImages);
+        console.log(this.preloadedImages.lenght() );
 
 
         this.canvas.addEventListener('mousemove', (e) => {
@@ -37,6 +45,7 @@ export default class Game {
             this.mouseX = e.clientX - rect.left;
             this.mouseY = e.clientY - rect.top;
         })
+        Game._instance = this;
     }
 
     setupInput() {
@@ -98,7 +107,8 @@ export default class Game {
             this.enemy.y = enemyPrevY;
 
             if(this.player.health <= 0){
-
+                this.player.health = 0;
+                alert("Du hast dich verletzt!");
             }
             setTimeout(() => {
                 const index = this.ignored.indexOf(this.enemy);
@@ -226,9 +236,4 @@ export default class Game {
 
 
     }
-
-
-
-
-
 }
