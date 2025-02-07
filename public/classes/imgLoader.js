@@ -131,6 +131,7 @@ export default class ImgLoader {
             img.onload = () => console.log(`${path} geladen`);
             img.onerror = () => console.error(`${path} konnte nicht geladen werden`);
             images.push(img);
+
         });
         return images;
     }

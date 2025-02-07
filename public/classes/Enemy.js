@@ -2,11 +2,14 @@
 import GameObject from "./GameObject.js";
 
 export default class Enemy extends GameObject {
-    constructor(x, y, width, height, color) {
-        super(x, y, width, height, color, 'enemy');
+    constructor(game,x, y, width, height, color) {
+        super(game,x, y, width, height, color, 'enemy');
         this.speed = 1;
         // Speichere einen wanderwinkel, der gelegentlich geändert wird, um ruckartige Richtungswechsel zu vermeiden
         this.wanderAngle = Math.random() * Math.PI * 2;
+
+        this.game = game
+        this.preloadedImages = this.game.preloadedImages;
     }
 
     /**
@@ -39,5 +42,11 @@ export default class Enemy extends GameObject {
             this.x += Math.cos(this.wanderAngle) * this.speed * 0.5;
             this.y += Math.sin(this.wanderAngle) * this.speed * 0.5;
         }
+    }
+
+    draw(ctx) {
+
+        ctx.drawImage(this.preloadedImages["enemy"][0], this.x -this.width / 2, this.y- this.height / 2, this.width, this.height);
+
     }
 }

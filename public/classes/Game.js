@@ -3,29 +3,32 @@ import Player from "./Player.js";
 import Enemy from "./Enemy.js";
 import UserInterface from './UserInterface.js';
 import imgLoader from './imgLoader.js';
+import Levels from "./Levels.js";
 export default class Game {
-    constructor(canvas, ctx, levels) {
-
-        if (Game._instance) {
-            return Game._instance;
-        }
+    constructor(ctx) {
 
 
 
-        this.canvas = canvas;
+        this.canvas = ctx.canvas;
         this.uiCanvas = document.getElementById("uiCanvas");
         this.uiCtx = this.uiCanvas.getContext("2d");
         this.ctx = ctx;
-        this.levels = levels;
+
         this.currentLevelIndex = 0;
         this.ignored = [];
         //debug
         this.mouseX = 0;
         this.mouseY = 0;
         this.paused = false;
+        console.error("-------GAME----------")
+        this.loader = new imgLoader();
+        this.preloadedImages = this.loader.images;
+
+
+        this.levels = new Levels(this).levels;
         // Spieler und Gegner werden erstellt – ihre Positionen werden beim Laden des Levels gesetzt.
-        this.player = new Player(this,0, 0, 32, 32, 'img:/player/idle/Idle_000.png');
-        this.enemy = new Enemy(0, 0, 32, 32, 'img:/enemys/enemy1.png');
+        this.player = new Player(this,0, 0, 32, 32, 'img:/player/Idle/Idle_000.png');
+        this.enemy = new Enemy(this,0, 0, 32, 32, 'img:/enemys/enemy1.png');
         this.ui = new UserInterface(this.uiCtx,this.player);
 
 
@@ -34,18 +37,20 @@ export default class Game {
 
         this.loadLevel(this.currentLevelIndex);
         this.gameLoop();
-        this.loader = new imgLoader();
-        this.preloadedImages = this.loader.imgaes;
 
-        console.log(this.preloadedImages.lenght() );
+
+
+
+
+        //console.log(this.preloadedImages.lenght() );
 
 
         this.canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
+            const rect = this.canvas.getBoundingClientRect();
             this.mouseX = e.clientX - rect.left;
             this.mouseY = e.clientY - rect.top;
         })
-        Game._instance = this;
+
     }
 
     setupInput() {
