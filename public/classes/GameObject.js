@@ -1,4 +1,4 @@
-
+import Game from "./Game.js";
 
 export default class GameObject {
     constructor(game,x, y, width, height, color, type = 'object') {
@@ -48,6 +48,9 @@ export default class GameObject {
         // Berechnet das effektive Kollisions-Rechteck eines Objekts.
         // Bei Spielern wird nur die untere Hälfte genutzt.
         const getEffectiveRect = (obj) => {
+
+            console.log(typeof obj);
+
             if (obj.type === 'player') {
                 return {
                     x: obj.x,

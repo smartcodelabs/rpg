@@ -28,7 +28,7 @@ export default class Game {
         this.levels = new Levels(this).levels;
         // Spieler und Gegner werden erstellt – ihre Positionen werden beim Laden des Levels gesetzt.
         this.player = new Player(this,0, 0, 32, 32, 'img:/player/Idle/Idle_000.png');
-        this.enemy = new Enemy(this,0, 0, 32, 32, 'img:/enemys/enemy1.png');
+        // this.enemy = new Enemy(this,0, 0, 32, 32, 'img:/enemys/enemy1.png');
         this.ui = new UserInterface(this.uiCtx,this.player);
 
 
@@ -78,8 +78,8 @@ export default class Game {
         }
 
         // Setze die Startposition des Gegners (oder anderer Objekte) wie gewohnt:
-        this.enemy.x = level.enemyStart.x;
-        this.enemy.y = level.enemyStart.y;
+        // this.enemy.x = level.enemyStart.x;
+        // this.enemy.y = level.enemyStart.y;
         console.log(`Level ${levelIndex} geladen`);
     }
 
@@ -96,39 +96,50 @@ export default class Game {
         // Spielerbewegung
         const playerPrevX = this.player.x;
         const playerPrevY = this.player.y;
-        const enemyPrevX = this.enemy.x;
-        const enemyPrevY = this.enemy.y;
+        // const enemyPrevX = this.enemy.x;
+        // const enemyPrevY = this.enemy.y;
 
         this.player.move(this.keys);
-        this.enemy.update(this.player);
+
+        //enemys in level object updaten
+        this.levels[this.currentLevelIndex].objects.forEach(obj => {
+            console.log("jhagsjdhagshjd "+obj);
+            if(obj.type === 'enemy'){
+
+                obj.update(this.player);
+            }
+
+        })
+
+        // this.enemy.update(this.player);
 
 
         //Kollisionsüberprüfung Gegner
-        if (this.player.isColliding(this.enemy) && !this.ignored.includes(this.enemy)) {
-            this.ignored.push(this.enemy);
-            console.log("Kampf gestartet!");
-            this.player.health -= Math.floor(Math.random() * (20 - 10 + 1)) + 10;
-            this.enemy.x = enemyPrevX;
-            this.enemy.y = enemyPrevY;
+        // if (this.player.isColliding(this.enemy) && !this.ignored.includes(this.enemy)) {
+        //     this.ignored.push(this.enemy);
+        //     console.log("Kampf gestartet!");
+        //     this.player.health -= Math.floor(Math.random() * (20 - 10 + 1)) + 10;
+        //     this.enemy.x = enemyPrevX;
+        //     this.enemy.y = enemyPrevY;
+        //
+        //     if(this.player.health <= 0){
+        //         this.player.health = 0;
+        //         alert("Du hast dich verletzt!");
+        //     }
+        //     setTimeout(() => {
+        //         const index = this.ignored.indexOf(this.enemy);
+        //         if (index !== -1) {
+        //             this.ignored.splice(index, 1);
+        //         }
+        //     }, 1500);
+        //
+        // }
 
-            if(this.player.health <= 0){
-                this.player.health = 0;
-                alert("Du hast dich verletzt!");
-            }
-            setTimeout(() => {
-                const index = this.ignored.indexOf(this.enemy);
-                if (index !== -1) {
-                    this.ignored.splice(index, 1);
-                }
-            }, 1500);
-
-        }
 
 
-
-        if (this.player.isColliding(this.player)) {
-            //später pvp Kämpfe runden basiert
-        }
+        // if (this.player.isColliding(this.player)) {
+        //     //später pvp Kämpfe runden basiert
+        // }
 
 
 
@@ -140,14 +151,13 @@ export default class Game {
                let y = rowIndex;
             row.forEach((row2, row2Index) => {
                let x = row2Index;
-               this
 
 
             });
         });
 
         level.objects.forEach(obj => {
-            if (this.player.isColliding(obj) || this.enemy.isColliding(obj)) {
+            if (this.player.isColliding(obj) ) {
                 let pc = this.player.isColliding(obj);
                 let o = obj.type.split(':')[0];
                 let item = obj.type.split(':')[1];
@@ -174,11 +184,13 @@ export default class Game {
                         if (this.player.isColliding(obj)){
                             this.player.x = playerPrevX;
                             this.player.y = playerPrevY;
-                        }else if (this.enemy.isColliding(obj)){
-                            this.enemy.x = enemyPrevX;
-                            this.enemy.y = enemyPrevY;
-                            this.enemy.colision = true;
                         }
+                        // else if (this.enemy.isColliding(obj)){
+                        //     this.enemy.x = enemyPrevX;
+                        //     this.enemy.y = enemyPrevY;
+                        //     this.enemy.colision = true;
+                        // }
+
 
 
                         break;
@@ -229,7 +241,7 @@ export default class Game {
 
         //Zeichne Spieler und Gegner
         this.player.draw(this.ctx);
-        this.enemy.draw(this.ctx);
+        // this.enemy.draw(this.ctx);
     }
 
     gameLoop() {

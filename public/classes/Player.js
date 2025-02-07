@@ -3,7 +3,7 @@ import GameObject from "./GameObject.js";
 
 export default class Player extends GameObject {
     constructor(game, x, y, width, height, color) {
-        super(game, x, y, 100, 100, color, 'player');
+        super(game, x, y, width, height, color, 'player');
         this.speed = 3;
         this.health = 100;
         this.inventory = [];

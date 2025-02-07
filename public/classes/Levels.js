@@ -1,5 +1,6 @@
 import GameObject from "./GameObject.js";
 import Level from "./Level.js";
+import Enemy from "./Enemy.js";
 
 export default class Levels {
     constructor(game) {
@@ -34,6 +35,9 @@ export default class Levels {
                 new GameObject(this.game,475, 125, 30, 30, 'img:/items/apple.png', 'item:apple'),
                 new GameObject(this.game,630, 370, 30, 30, 'img:/items/apple.png', 'item:apple'),
                 new GameObject(this.game,40, 600, 30, 30, 'img:/items/apple.png', 'item:apple'),
+                new Enemy(this.game,100, 100, 32, 32, 'img:/enemys/enemy1.png'),
+                new Enemy(this.game,500, 500, 32, 32, 'img:/enemys/enemy1.png'),
+
                 exitObj0
             ]
         ));
