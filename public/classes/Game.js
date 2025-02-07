@@ -1,12 +1,11 @@
-
 import Player from "./Player.js";
 import Enemy from "./Enemy.js";
 import UserInterface from './UserInterface.js';
 import imgLoader from './imgLoader.js';
 import Levels from "./Levels.js";
+
 export default class Game {
     constructor(ctx) {
-
 
 
         this.canvas = ctx.canvas;
@@ -26,24 +25,13 @@ export default class Game {
 
 
         this.levels = new Levels(this).levels;
-        // Spieler und Gegner werden erstellt – ihre Positionen werden beim Laden des Levels gesetzt.
-        this.player = new Player(this,0, 0, 32, 32, 'img:/player/Idle/Idle_000.png');
-        // this.enemy = new Enemy(this,0, 0, 32, 32, 'img:/enemys/enemy1.png');
-        this.ui = new UserInterface(this.uiCtx,this.player);
-
-
+        this.player = new Player(this, 0, 0, 32, 32, 'img:/player/Idle/Idle_000.png');
+        this.ui = new UserInterface(this.uiCtx, this.player);
         this.keys = {};
         this.setupInput();
-
+        this.currentLevel = null
         this.loadLevel(this.currentLevelIndex);
         this.gameLoop();
-
-
-
-
-
-        //console.log(this.preloadedImages.lenght() );
-
 
         this.canvas.addEventListener('mousemove', (e) => {
             const rect = this.canvas.getBoundingClientRect();
@@ -66,27 +54,25 @@ export default class Game {
 
     loadLevel(levelIndex, spawnPoint = null) {
         this.currentLevelIndex = levelIndex;
-        const level = this.levels[levelIndex];
+        this.currentLevel = this.levels[levelIndex];
 
         // Setze die Startposition des Spielers:
         if (spawnPoint) {
             this.player.x = spawnPoint.x;
             this.player.y = spawnPoint.y;
         } else {
-            this.player.x = level.playerStart.x;
-            this.player.y = level.playerStart.y;
+            this.player.x = this.currentLevel.playerStart.x;
+            this.player.y = this.currentLevel.playerStart.y;
         }
 
-        // Setze die Startposition des Gegners (oder anderer Objekte) wie gewohnt:
-        // this.enemy.x = level.enemyStart.x;
-        // this.enemy.y = level.enemyStart.y;
-        console.log(`Level ${levelIndex} geladen`);
+        this.ui.addMessage(`Level ${levelIndex} geladen`);
+        this.ui.addMessage(this.currentLevel.description);
+
     }
 
     //Debug maus
 
-
-
+    //hier muss noch vieles in Plaser.js ausgelagert werden
     update() {
         this.ui.draw(this.ctx)
         document.getElementById("debugMouse").innerHTML = `
@@ -96,51 +82,17 @@ export default class Game {
         // Spielerbewegung
         const playerPrevX = this.player.x;
         const playerPrevY = this.player.y;
-        // const enemyPrevX = this.enemy.x;
-        // const enemyPrevY = this.enemy.y;
+
 
         this.player.move(this.keys);
 
         //enemys in level object updaten
         this.levels[this.currentLevelIndex].objects.forEach(obj => {
-            console.log("jhagsjdhagshjd "+obj);
-            if(obj.type === 'enemy'){
-
+            if (obj.type === 'enemy') {
                 obj.update(this.player);
             }
 
         })
-
-        // this.enemy.update(this.player);
-
-
-        //Kollisionsüberprüfung Gegner
-        // if (this.player.isColliding(this.enemy) && !this.ignored.includes(this.enemy)) {
-        //     this.ignored.push(this.enemy);
-        //     console.log("Kampf gestartet!");
-        //     this.player.health -= Math.floor(Math.random() * (20 - 10 + 1)) + 10;
-        //     this.enemy.x = enemyPrevX;
-        //     this.enemy.y = enemyPrevY;
-        //
-        //     if(this.player.health <= 0){
-        //         this.player.health = 0;
-        //         alert("Du hast dich verletzt!");
-        //     }
-        //     setTimeout(() => {
-        //         const index = this.ignored.indexOf(this.enemy);
-        //         if (index !== -1) {
-        //             this.ignored.splice(index, 1);
-        //         }
-        //     }, 1500);
-        //
-        // }
-
-
-
-        // if (this.player.isColliding(this.player)) {
-        //     //später pvp Kämpfe runden basiert
-        // }
-
 
 
         //Kollisionsüberprüfung
@@ -148,30 +100,37 @@ export default class Game {
 
 
         level.map_data.forEach((row, rowIndex) => {
-               let y = rowIndex;
+            let y = rowIndex;
             row.forEach((row2, row2Index) => {
-               let x = row2Index;
+                let x = row2Index;
 
 
             });
         });
 
         level.objects.forEach(obj => {
-            if (this.player.isColliding(obj) ) {
+            if (this.player.isColliding(obj)) {
                 let pc = this.player.isColliding(obj);
                 let o = obj.type.split(':')[0];
                 let item = obj.type.split(':')[1];
 
-                switch(o) {
+                switch (o) {
                     case 'exit':
-                        if (pc){
-                            console.log("Levelwechsel!");
-                            // Prüfe, ob das Exit-Objekt einen individuellen Spawnpunkt definiert hat
-                            let spawnPoint = null;
-                            if (obj.spawnPoint) {
-                                spawnPoint = obj.spawnPoint;
+                        if (pc) {
+                            if (obj.isUnlocked()) {
+                                console.log("Levelwechsel!");
+                                // Prüfe, ob das Exit-Objekt einen individuellen Spawnpunkt definiert hat
+                                let spawnPoint = null;
+                                if (obj.spawnPoint) {
+                                    spawnPoint = obj.spawnPoint;
+                                }
+                                this.loadLevel(obj.nextLevel, spawnPoint);
+
+                            } else {
+                                this.ui.addMessage("Portal gesperrt sammel erst 5 Äpfel!");
                             }
-                            this.loadLevel(obj.nextLevel, spawnPoint);
+
+
                         }
 
                         break;
@@ -181,7 +140,7 @@ export default class Game {
                     case 'lava':
                     case 'tree':
                     case 'border':
-                        if (this.player.isColliding(obj)){
+                        if (this.player.isColliding(obj)) {
                             this.player.x = playerPrevX;
                             this.player.y = playerPrevY;
                         }
@@ -192,37 +151,60 @@ export default class Game {
                         // }
 
 
-
                         break;
                     case 'item':
-                        if (this.player.isColliding(obj)){
+                        if (this.player.isColliding(obj)) {
+                            // Extrahiere den Item-Schlüssel, z. B. "apple" aus "item:apple"
+                            const itemId = obj.type.split(":")[1];
                             let playerInv = this.player.inventory;
 
+                            // Versuche, einen existierenden Stack für diesen Item-Typ zu finden
+                            let existingStack = playerInv.find(item => item.type === obj.type);
 
-                            if (playerInv.length < this.player.invSize) {
-                                level.removeObject(obj);
-                                this.player.inventory.push(obj);
-                            }else if(!this.ignored.includes(obj)){
-
-                                console.log(`Inventar ist voll kann ${obj.type.split(":")[1]} nicht einsammeln!`);
-
-                                this.ignored.push(obj);
-
-
-                                setTimeout(() => {
-                                    const index = this.ignored.indexOf(obj);
-                                    if (index !== -1) {
-                                        this.ignored.splice(index, 1);
+                            if (existingStack) {
+                                // Falls der Stack noch nicht voll ist, füge das Item hinzu
+                                if (existingStack.stack < 64) {
+                                    existingStack.stack++;
+                                    level.removeObject(obj);
+                                } else {
+                                    // Der Stack ist voll – versuche, einen neuen Stack anzulegen, wenn Platz ist
+                                    if (playerInv.length < this.player.invSize) {
+                                        // Setze den Stack-Zähler des neuen Items auf 1
+                                        obj.stack = 1;
+                                        level.removeObject(obj);
+                                        playerInv.push(obj);
+                                    } else if (!this.ignored.includes(obj)) {
+                                        console.log(`Inventar ist voll, kann ${itemId} nicht einsammeln!`);
+                                        this.ignored.push(obj);
+                                        setTimeout(() => {
+                                            const index = this.ignored.indexOf(obj);
+                                            if (index !== -1) {
+                                                this.ignored.splice(index, 1);
+                                            }
+                                        }, 3000);
                                     }
-                                }, 3000);
-
+                                }
+                            } else {
+                                // Es existiert noch kein Stack für diesen Item-Typ
+                                if (playerInv.length < this.player.invSize) {
+                                    // Erstelle einen neuen Stack: Setze die Stackgröße auf 1 und füge das Item hinzu
+                                    obj.stack = 1;
+                                    level.removeObject(obj);
+                                    playerInv.push(obj);
+                                } else if (!this.ignored.includes(obj)) {
+                                    console.log(`Inventar ist voll, kann ${itemId} nicht einsammeln!`);
+                                    this.ignored.push(obj);
+                                    setTimeout(() => {
+                                        const index = this.ignored.indexOf(obj);
+                                        if (index !== -1) {
+                                            this.ignored.splice(index, 1);
+                                        }
+                                    }, 3000);
+                                }
                             }
                         }
-
-
-
-
                         break;
+
                     default:
                         break;
                 }
@@ -239,9 +221,8 @@ export default class Game {
             obj.draw(this.ctx);
         });
 
-        //Zeichne Spieler und Gegner
+        //Zeichne Spieler
         this.player.draw(this.ctx);
-        // this.enemy.draw(this.ctx);
     }
 
     gameLoop() {
