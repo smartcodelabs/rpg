@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JavaScript-modules-diagram</ID>
+  <OriginalElement>C:/Users/jason/PhpstormProjects/rpg/public/classes/Enemy.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/GameObject.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/imgLoader.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/Level.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/Player.js;C:/Users/jason/PhpstormProjects/rpg/public/classes/UserInterface.js;C:/Users/jason/PhpstormProjects/rpg/public/script.js;C:/Users/jason/PhpstormProjects/rpg/index.js;C:/Users/jason/PhpstormProjects/rpg/public/index.html;</OriginalElement>
+  <nodes>
+    <node x="200.5" y="36.0">C:/Users/jason/PhpstormProjects/rpg/public/classes/Enemy.js#GameObject#34;</node>
+    <node x="296.5" y="320.0">C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;</node>
+    <node x="298.74375" y="-81.0">C:/Users/jason/PhpstormProjects/rpg/public/classes/GameObject.js#Game#7;</node>
+    <node x="391.5" y="53.5">C:/Users/jason/PhpstormProjects/rpg/public/classes/Level.js</node>
+    <node x="388.15625" y="155.0">C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Enemy#81;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#GameObject#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Level#49;</node>
+    <node x="14.5" y="36.0">C:/Users/jason/PhpstormProjects/rpg/public/classes/Player.js#GameObject#35;</node>
+    <node x="577.15625" y="196.5">C:/Users/jason/PhpstormProjects/rpg/public/classes/UserInterface.js</node>
+    <node x="-111.0" y="196.5">C:/Users/jason/PhpstormProjects/rpg/public/classes/imgLoader.js</node>
+    <node x="-111.0" y="721.0">C:/Users/jason/AppData/Local/JetBrains/PhpStorm2024.3/javascript/typings/express/4.17.21/node_modules/@types/express/index.d.ts</node>
+    <node x="294.0" y="646.0">C:/Users/jason/PhpstormProjects/rpg/public/index.html</node>
+    <node x="-79.0" y="801.0">C:/Users/jason/PhpstormProjects/rpg/index.js#express#7;</node>
+    <node x="302.5" y="531.0">C:/Users/jason/PhpstormProjects/rpg/public/script.js#Game#7;</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Enemy#81;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#GameObject#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Level#49;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Level.js" relationship="">
+      <point x="0.0" y="-56.5" />
+      <point x="472.15625" y="123.0" />
+      <point x="470.0" y="123.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Enemy#81;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#GameObject#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Level#49;" relationship="">
+      <point x="0.0" y="-80.5" />
+      <point x="378.0" y="294.0" />
+      <point x="472.15625" y="294.0" />
+      <point x="0.0" y="56.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/script.js#Game#7;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" relationship="">
+      <point x="0.0" y="-32.5" />
+      <point x="0.0" y="80.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Player.js#GameObject#35;" relationship="">
+      <point x="0.0" y="-80.5" />
+      <point x="378.0" y="294.0" />
+      <point x="97.5" y="294.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/index.html" target="C:/Users/jason/PhpstormProjects/rpg/public/script.js#Game#7;" relationship="">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Enemy.js#GameObject#34;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/GameObject.js#Game#7;" relationship="">
+      <point x="0.0" y="-32.5" />
+      <point x="286.0" y="10.0" />
+      <point x="405.24375" y="10.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/imgLoader.js" relationship="">
+      <point x="0.0" y="-80.5" />
+      <point x="378.0" y="294.0" />
+      <point x="-12.0" y="294.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/index.js#express#7;" target="C:/Users/jason/AppData/Local/JetBrains/PhpStorm2024.3/javascript/typings/express/4.17.21/node_modules/@types/express/index.d.ts" relationship="">
+      <point x="0.0" y="-32.5" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/UserInterface.js" relationship="">
+      <point x="0.0" y="-80.5" />
+      <point x="378.0" y="294.0" />
+      <point x="687.65625" y="294.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Enemy#81;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#GameObject#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Level#49;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Enemy.js#GameObject#34;" relationship="">
+      <point x="0.0" y="-56.5" />
+      <point x="472.15625" y="133.0" />
+      <point x="286.0" y="133.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Enemy#81;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#GameObject#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Levels.js#Level#49;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/GameObject.js#Game#7;" relationship="">
+      <point x="0.0" y="-56.5" />
+      <point x="472.15625" y="123.0" />
+      <point x="561.75" y="123.0" />
+      <point x="561.75" y="10.0" />
+      <point x="405.24375" y="10.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/GameObject.js#Game#7;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" relationship="">
+      <point x="0.0" y="32.5" />
+      <point x="405.24375" y="10.0" />
+      <point x="566.65625" y="10.0" />
+      <point x="566.65625" y="294.0" />
+      <point x="378.0" y="294.0" />
+      <point x="0.0" y="-80.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Enemy#41;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Levels#161;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#Player#7;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#UserInterface#73;C:/Users/jason/PhpstormProjects/rpg/public/classes/Game.js#imgLoader#121;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/Enemy.js#GameObject#34;" relationship="">
+      <point x="0.0" y="-80.5" />
+      <point x="378.0" y="294.0" />
+      <point x="286.0" y="294.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+    <edge source="C:/Users/jason/PhpstormProjects/rpg/public/classes/Player.js#GameObject#35;" target="C:/Users/jason/PhpstormProjects/rpg/public/classes/GameObject.js#Game#7;" relationship="">
+      <point x="0.0" y="-32.5" />
+      <point x="97.5" y="10.0" />
+      <point x="405.24375" y="10.0" />
+      <point x="0.0" y="32.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="1.0" showDependencies="false" x="428.5" y="263.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>All</Category>
+  </Categories>
+  <VISIBILITY>Details</VISIBILITY>
+</Diagram>
+

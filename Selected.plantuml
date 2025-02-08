@@ -1,0 +1,54 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class node3 as "@types/.../index.d.ts"
+class node5 as "classes/Enemy.js" {
+   GameObject: 
+}
+class node11 as "classes/Game.js" {
+   Enemy: 
+   Levels: 
+   Player: 
+   UserInterface: 
+   imgLoader: 
+}
+class node1 as "classes/GameObject.js" {
+   Game: 
+}
+class node8 as "classes/Level.js"
+class node10 as "classes/Levels.js" {
+   Enemy: 
+   GameObject: 
+   Level: 
+}
+class node2 as "classes/Player.js" {
+   GameObject: 
+}
+class node9 as "classes/UserInterface.js"
+class node0 as "classes/imgLoader.js"
+class node6 as "public/index.html"
+class node7 as "public/script.js" {
+   Game: 
+}
+class node4 as "rpg/index.js" {
+   express: 
+}
+
+node5   <-[#595959,plain]-  node1  
+node11  <-[#595959,plain]-  node5  
+node11  <-[#595959,plain]-  node10 
+node11  <-[#595959,plain]-  node2  
+node11  <-[#595959,plain]-  node9  
+node11  <-[#595959,plain]-  node0  
+node1   <-[#595959,plain]-  node11 
+node10  <-[#595959,plain]-  node5  
+node10  <-[#595959,plain]-  node1  
+node10  <-[#595959,plain]-  node8  
+node2   <-[#595959,plain]-  node1  
+node6   <-[#595959,plain]-  node7  
+node7   <-[#595959,plain]-  node11 
+node4   <-[#595959,plain]-  node3  
+@enduml
